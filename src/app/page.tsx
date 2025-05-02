@@ -1,77 +1,49 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import Image from 'next/image';
+import {ThemeToggle} from '@/app/theme-toogle';
+import Link from 'next/link';
+import {Button} from '@/components/ui/button';
+import {ConnectWalletButton} from '@/components/ConnectWalletButton';
 
-export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
+
+export default () => (
+  <div className="relative flex min-h-screen flex-col items-center justify-center p-3.5">
+    <main className="flex flex-col items-center gap-y-9 pb-12">
+      <div className="max-w-lg space-y-3.5 text-center">
+        <h1 className="text-5xl font-semibold tracking-tight md:text-7xl">
+          0wallet
+        </h1>
+        <p className="md:text-balance text-muted-foreground md:text-xl">
+          connect wallet with reown and contract info from polygon
+          also chart from Path to make some more UI interaction
+        </p>
+      </div>
+      <div className="flex items-center gap-3.5">
+        <ThemeToggle/>
+        <ConnectWalletButton/>
+        <Link href="https://github.com/bardak-dev/0w" target="_blank">
+          <Button variant="ghost" className="rounded-xl">
+            GitHub &rarr;
+          </Button>
+        </Link>
+      </div>
+    </main>
+
+    <footer className="absolute bottom-3.5 mx-auto flex items-center gap-[0.5ch] text-center text-muted-foreground">
+      <Link
+        href="https://github.com/bardak-dev"
+        target="_blank"
+        className="group flex items-center gap-[0.5ch] underline-offset-4 hover:underline"
+      >
         <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
+          src="https://avatars.githubusercontent.com/u/5928632"
+          alt="bardak-dev logo"
+          width={32}
+          height={32}
+          unoptimized
+          className="size-5 group-hover:size-6 transition-all rounded-full"
         />
-        <ol>
-          <li className="text-sky-500">
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image aria-hidden src="/file.svg" alt="File icon" width={16} height={16} />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image aria-hidden src="/window.svg" alt="Window icon" width={16} height={16} />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image aria-hidden src="/globe.svg" alt="Globe icon" width={16} height={16} />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
-}
+        bardak-dev
+      </Link>
+    </footer>
+  </div>
+)
