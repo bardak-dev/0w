@@ -1,10 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { InheritanceTooltip } from "./InheritanceTooltip";
-import { Abi, AbiFunction } from "abitype";
-import { Address, TransactionReceipt } from "viem";
-import { useAccount, useConfig, useWaitForTransactionReceipt, useWriteContract } from "wagmi";
 import {
   ContractInput,
   TxReceipt,
@@ -12,11 +7,16 @@ import {
   getInitialFormState,
   getParsedContractFunctionArgs,
   transformAbiFunction,
-} from "~~/components/debug-contracts/_components/contract";
-import { IntegerInput } from "~~/components/scaffold-eth";
-import { useTransactor } from "~~/hooks/scaffold-eth";
-import { useTargetNetwork } from "~~/hooks/scaffold-eth/useTargetNetwork";
-import { simulateContractWriteAndNotifyError } from "~~/utils/scaffold-eth/contract";
+} from "@/components/debug-contracts/_components/contract";
+import { IntegerInput } from "@/libs/scaffold-eth/components";
+import { useTransactor } from "@/libs/scaffold-eth/hooks";
+import { useTargetNetwork } from "@/libs/scaffold-eth/hooks/useTargetNetwork";
+import { simulateContractWriteAndNotifyError } from "@/libs/scaffold-eth/utils/contract";
+import type { Abi, AbiFunction } from "abitype";
+import { useEffect, useState } from "react";
+import type { Address, TransactionReceipt } from "viem";
+import { useAccount, useConfig, useWaitForTransactionReceipt, useWriteContract } from "wagmi";
+import { InheritanceTooltip } from "./InheritanceTooltip";
 
 type WriteOnlyFunctionFormProps = {
   abi: Abi;
@@ -54,7 +54,10 @@ export const WriteOnlyFunctionForm = ({
           args: getParsedContractFunctionArgs(form),
           value: BigInt(txValue),
         };
-        await simulateContractWriteAndNotifyError({ wagmiConfig, writeContractParams: writeContractObj });
+        await simulateContractWriteAndNotifyError({
+          wagmiConfig,
+          writeContractParams: writeContractObj,
+        });
 
         const makeWriteWithParams = () => writeContractAsync(writeContractObj);
         await writeTxn(makeWriteWithParams);
@@ -80,7 +83,7 @@ export const WriteOnlyFunctionForm = ({
     return (
       <ContractInput
         key={key}
-        setForm={updatedFormValue => {
+        setForm={(updatedFormValue) => {
           setDisplayedTxResult(undefined);
           setForm(updatedFormValue);
         }}
@@ -94,7 +97,9 @@ export const WriteOnlyFunctionForm = ({
 
   return (
     <div className="py-5 space-y-3 first:pt-0 last:pb-1">
-      <div className={`flex gap-3 ${zeroInputs ? "flex-row justify-between items-center" : "flex-col"}`}>
+      <div
+        className={`flex gap-3 ${zeroInputs ? "flex-row justify-between items-center" : "flex-col"}`}
+      >
         <p className="font-medium my-0 break-words">
           {abiFunction.name}
           <InheritanceTooltip inheritedFrom={inheritedFrom} />
@@ -108,7 +113,7 @@ export const WriteOnlyFunctionForm = ({
             </div>
             <IntegerInput
               value={txValue}
-              onChange={updatedTxValue => {
+              onChange={(updatedTxValue: any) => {
                 setDisplayedTxResult(undefined);
                 setTxValue(updatedTxValue);
               }}
@@ -129,7 +134,11 @@ export const WriteOnlyFunctionForm = ({
             }`}
             data-tip={`${writeDisabled && "Wallet not connected or in the wrong network"}`}
           >
-            <button className="btn btn-secondary btn-sm" disabled={writeDisabled || isPending} onClick={handleWrite}>
+            <button
+              className="btn btn-secondary btn-sm"
+              disabled={writeDisabled || isPending}
+              onClick={handleWrite}
+            >
               {isPending && <span className="loading loading-spinner loading-xs"></span>}
               Send 💸
             </button>

@@ -1,8 +1,8 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { replacer } from "@/libs/scaffold-eth/utils/common";
+import type { AbiParameterTuple } from "@/libs/scaffold-eth/utils/contract";
+import { type Dispatch, type SetStateAction, useEffect, useState } from "react";
 import { ContractInput } from "./ContractInput";
 import { getFunctionInputKey, getInitialTupleArrayFormState } from "./utilsContract";
-import { replacer } from "~~/utils/scaffold-eth/common";
-import { AbiParameterTuple } from "~~/utils/scaffold-eth/contract";
 
 type TupleArrayProps = {
   abiTupleParameter: AbiParameterTuple & { isVirtual?: true };
@@ -11,11 +11,17 @@ type TupleArrayProps = {
   parentForm: Record<string, any> | undefined;
 };
 
-export const TupleArray = ({ abiTupleParameter, setParentForm, parentStateObjectKey }: TupleArrayProps) => {
-  const [form, setForm] = useState<Record<string, any>>(() => getInitialTupleArrayFormState(abiTupleParameter));
-  const [additionalInputs, setAdditionalInputs] = useState<Array<typeof abiTupleParameter.components>>([
-    abiTupleParameter.components,
-  ]);
+export const TupleArray = ({
+  abiTupleParameter,
+  setParentForm,
+  parentStateObjectKey,
+}: TupleArrayProps) => {
+  const [form, setForm] = useState<Record<string, any>>(() =>
+    getInitialTupleArrayFormState(abiTupleParameter),
+  );
+  const [additionalInputs, setAdditionalInputs] = useState<
+    Array<typeof abiTupleParameter.components>
+  >([abiTupleParameter.components]);
 
   const depth = (abiTupleParameter.type.match(/\[\]/g) || []).length;
 
@@ -36,7 +42,7 @@ export const TupleArray = ({ abiTupleParameter, setParentForm, parentStateObject
 
     let argsArray: Array<Record<string, any>> = [];
 
-    Object.keys(groupedFields).forEach(key => {
+    Object.keys(groupedFields).forEach((key) => {
       const currentKeyValues = Object.values(groupedFields[key]);
 
       const argsStruct: Record<string, any> = {};
@@ -48,23 +54,23 @@ export const TupleArray = ({ abiTupleParameter, setParentForm, parentStateObject
     });
 
     if (depth > 1) {
-      argsArray = argsArray.map(args => {
+      argsArray = argsArray.map((args) => {
         return args[abiTupleParameter.components[0].name || "tuple"];
       });
     }
 
-    setParentForm(parentForm => {
+    setParentForm((parentForm) => {
       return { ...parentForm, [parentStateObjectKey]: JSON.stringify(argsArray, replacer) };
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [JSON.stringify(form, replacer)]);
 
   const addInput = () => {
-    setAdditionalInputs(previousValue => {
+    setAdditionalInputs((previousValue) => {
       const newAdditionalInputs = [...previousValue, abiTupleParameter.components];
 
       // Add the new inputs to the form
-      setForm(form => {
+      setForm((form) => {
         const newForm = { ...form };
         abiTupleParameter.components.forEach((component, componentIndex) => {
           const key = getFunctionInputKey(
@@ -83,7 +89,7 @@ export const TupleArray = ({ abiTupleParameter, setParentForm, parentStateObject
 
   const removeInput = () => {
     // Remove the last inputs from the form
-    setForm(form => {
+    setForm((form) => {
       const newForm = { ...form };
       abiTupleParameter.components.forEach((component, componentIndex) => {
         const key = getFunctionInputKey(
@@ -95,7 +101,7 @@ export const TupleArray = ({ abiTupleParameter, setParentForm, parentStateObject
       });
       return newForm;
     });
-    setAdditionalInputs(inputs => inputs.slice(0, -1));
+    setAdditionalInputs((inputs) => inputs.slice(0, -1));
   };
 
   return (
@@ -119,7 +125,13 @@ export const TupleArray = ({ abiTupleParameter, setParentForm, parentStateObject
                     index,
                   );
                   return (
-                    <ContractInput setForm={setForm} form={form} key={key} stateObjectKey={key} paramType={param} />
+                    <ContractInput
+                      setForm={setForm}
+                      form={form}
+                      key={key}
+                      stateObjectKey={key}
+                      paramType={param}
+                    />
                   );
                 })}
               </div>

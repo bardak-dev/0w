@@ -1,6 +1,11 @@
-import { Abi, AbiFunction } from "abitype";
-import { WriteOnlyFunctionForm } from "~~/components/debug-contracts/_components/contract";
-import { Contract, ContractName, GenericContract, InheritedFunctions } from "~~/utils/scaffold-eth/contract";
+import { WriteOnlyFunctionForm } from "@/components/debug-contracts/_components/contract";
+import type {
+  Contract,
+  ContractName,
+  GenericContract,
+  InheritedFunctions,
+} from "@/libs/scaffold-eth/utils/contract";
+import type { Abi, AbiFunction } from "abitype";
 
 export const ContractWriteMethods = ({
   onChange,
@@ -14,16 +19,18 @@ export const ContractWriteMethods = ({
   }
 
   const functionsToDisplay = (
-    (deployedContractData.abi as Abi).filter(part => part.type === "function") as AbiFunction[]
+    (deployedContractData.abi as Abi).filter((part) => part.type === "function") as AbiFunction[]
   )
-    .filter(fn => {
+    .filter((fn) => {
       const isWriteableFunction = fn.stateMutability !== "view" && fn.stateMutability !== "pure";
       return isWriteableFunction;
     })
-    .map(fn => {
+    .map((fn) => {
       return {
         fn,
-        inheritedFrom: ((deployedContractData as GenericContract)?.inheritedFunctions as InheritedFunctions)?.[fn.name],
+        inheritedFrom: (
+          (deployedContractData as GenericContract)?.inheritedFunctions as InheritedFunctions
+        )?.[fn.name],
       };
     })
     .sort((a, b) => (b.inheritedFrom ? b.inheritedFrom.localeCompare(a.inheritedFrom) : 1));

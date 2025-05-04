@@ -1,9 +1,9 @@
+import { ObjectFieldDisplay } from "@/components/debug-contracts/_components/contract";
+import { replacer } from "@/libs/scaffold-eth/utils/common";
+import { CheckCircleIcon, DocumentDuplicateIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import CopyToClipboard from "react-copy-to-clipboard";
-import { TransactionReceipt } from "viem";
-import { CheckCircleIcon, DocumentDuplicateIcon } from "@heroicons/react/24/outline";
-import { ObjectFieldDisplay } from "~~/components/debug-contracts/_components/contract";
-import { replacer } from "~~/utils/scaffold-eth/common";
+import type { TransactionReceipt } from "viem";
 
 export const TxReceipt = ({ txResult }: { txResult: TransactionReceipt }) => {
   const [txResultCopied, setTxResultCopied] = useState(false);
@@ -26,7 +26,10 @@ export const TxReceipt = ({ txResult }: { txResult: TransactionReceipt }) => {
               }, 800);
             }}
           >
-            <DocumentDuplicateIcon className="ml-1.5 text-xl font-normal h-5 w-5 cursor-pointer" aria-hidden="true" />
+            <DocumentDuplicateIcon
+              className="ml-1.5 text-xl font-normal h-5 w-5 cursor-pointer"
+              aria-hidden="true"
+            />
           </CopyToClipboard>
         )}
       </div>

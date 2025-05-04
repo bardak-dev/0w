@@ -1,27 +1,26 @@
-import Image from 'next/image';
-import {ThemeToggle} from '@/app/theme-toogle';
-import Link from 'next/link';
-import {Button} from '@/components/ui/button';
-import {ConnectWallet} from '@/components/connect-wallet';
-import {DebugContracts} from '@/components/debug-contracts/_components/DebugContracts';
-
+import { ThemeToggle } from "@/app/theme-toogle";
+import { ConnectWallet } from "@/components/connect-wallet";
+import { DebugContracts } from "@/components/debug-contracts";
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import Link from "next/link";
 
 export default () => {
   return (
     <div className="relative flex min-h-screen flex-col items-center justify-center p-3.5">
       <main className="flex flex-col items-center gap-y-9 pb-12">
         <div className="max-w-lg space-y-3.5 text-center">
-          <h1 className="text-5xl font-semibold tracking-tight md:text-7xl">
-            0wallet
-          </h1>
+          <h1 className="text-5xl font-semibold tracking-tight md:text-7xl">0wallet</h1>
           <p className="md:text-balance text-muted-foreground md:text-xl">
-            connect wallet with <span className="font-mono">reown</span> and contract info from polygon
-            also chart from <span className="font-mono">pyth</span> to make some more UI interaction
+            connect wallet with <span className="font-mono">reown</span> and get desired info from{" "}
+            <span className="font-mono">polygon</span> contract also{" "}
+            <span className="font-mono">read</span> and <span className="font-mono">write</span>{" "}
+            calls to contract
           </p>
         </div>
         <div className="flex items-center gap-3.5">
-          <ThemeToggle/>
-          <ConnectWallet/>
+          <ThemeToggle />
+          <ConnectWallet />
           <Link href="https://github.com/bardak-dev/0w" target="_blank">
             <Button variant="ghost" className="rounded-xl">
               GitHub &rarr;
@@ -29,7 +28,7 @@ export default () => {
           </Link>
         </div>
         <div className="size-full flex justify-center">
-          <DebugContracts/>
+          <DebugContracts />
         </div>
       </main>
 
@@ -56,4 +55,4 @@ export default () => {
       </footer>
     </div>
   );
-}
+};

@@ -1,15 +1,15 @@
 "use client";
 
+import { useAnimationConfig } from "@/libs/scaffold-eth/hooks";
+import { useTargetNetwork } from "@/libs/scaffold-eth/hooks/useTargetNetwork";
+import { getParsedError, notification } from "@/libs/scaffold-eth/utils";
+import { ArrowPathIcon } from "@heroicons/react/24/outline";
+import type { Abi, AbiFunction } from "abitype";
 import { useEffect } from "react";
+import type { Address } from "viem";
+import { useReadContract } from "wagmi";
 import { InheritanceTooltip } from "./InheritanceTooltip";
 import { displayTxResult } from "./utilsDisplay";
-import { Abi, AbiFunction } from "abitype";
-import { Address } from "viem";
-import { useReadContract } from "wagmi";
-import { ArrowPathIcon } from "@heroicons/react/24/outline";
-import { useAnimationConfig } from "~~/hooks/scaffold-eth";
-import { useTargetNetwork } from "~~/hooks/scaffold-eth/useTargetNetwork";
-import { getParsedError, notification } from "~~/utils/scaffold-eth";
 
 type DisplayVariableProps = {
   contractAddress: Address;

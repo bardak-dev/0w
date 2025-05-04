@@ -1,36 +1,39 @@
-'use client';
-import {createMonoHook, useLazyFetch} from 'use-mono-hook';
-import {useEffect, useMemo, useState} from 'react';
+"use client";
+import { useEffect, useMemo, useState } from "react";
+import { createMonoHook, useLazyFetch } from "use-mono-hook";
 
 const _useDebugContract = () => {
   const [contract, setContract] = useState<any>();
-  const [{data, loading: deployedContractLoading}, fetchContractAbi] = useLazyFetch({
-    baseURL: '/api/polygonscan'
+  const [{ data, loading: deployedContractLoading }, fetchContractAbi] = useLazyFetch({
+    baseURL: "/api/polygonscan",
   });
 
-  const deployedContractData = useMemo(() => ({
-    address: contract?.addressChain,
-    abi: (() => {
-      try {
-        return JSON.parse(data?.result ?? '[]');
-      } catch(e) {
-        return [];
-      }
-    })(),
-    external: true
-  } as any), [data, contract]);
+  const deployedContractData = useMemo(
+    () =>
+      ({
+        address: contract?.addressChain,
+        abi: (() => {
+          try {
+            return JSON.parse(data?.result ?? "[]");
+          } catch (e) {
+            return [];
+          }
+        })(),
+        external: true,
+      }) as any,
+    [data, contract],
+  );
 
   useEffect(() => {
-
-    if(!contract) {
+    if (!contract) {
       return;
     }
     fetchContractAbi({
       params: {
-        module: 'contract',
-        action: 'getabi',
-        address: contract.addressChain
-      }
+        module: "contract",
+        action: "getabi",
+        address: contract.addressChain,
+      },
     }).catch(console.error);
   }, [contract]);
 
@@ -38,11 +41,10 @@ const _useDebugContract = () => {
     deployedContractData,
     deployedContractLoading,
     contract,
-    setContract
+    setContract,
   };
 };
 
 export const useDebugContract = createMonoHook<typeof _useDebugContract>(_useDebugContract, {
-    defaults: {}
-  }
-).useHook;
+  defaults: {},
+}).useHook;

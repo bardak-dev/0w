@@ -1,6 +1,11 @@
+import type {
+  Contract,
+  ContractName,
+  GenericContract,
+  InheritedFunctions,
+} from "@/libs/scaffold-eth/utils/contract";
+import type { Abi, AbiFunction } from "abitype";
 import { DisplayVariable } from "./DisplayVariable";
-import { Abi, AbiFunction } from "abitype";
-import { Contract, ContractName, GenericContract, InheritedFunctions } from "~~/utils/scaffold-eth/contract";
 
 export const ContractVariables = ({
   refreshDisplayVariables,
@@ -14,17 +19,19 @@ export const ContractVariables = ({
   }
 
   const functionsToDisplay = (
-    (deployedContractData.abi as Abi).filter(part => part.type === "function") as AbiFunction[]
+    (deployedContractData.abi as Abi).filter((part) => part.type === "function") as AbiFunction[]
   )
-    .filter(fn => {
+    .filter((fn) => {
       const isQueryableWithNoParams =
         (fn.stateMutability === "view" || fn.stateMutability === "pure") && fn.inputs.length === 0;
       return isQueryableWithNoParams;
     })
-    .map(fn => {
+    .map((fn) => {
       return {
         fn,
-        inheritedFrom: ((deployedContractData as GenericContract)?.inheritedFunctions as InheritedFunctions)?.[fn.name],
+        inheritedFrom: (
+          (deployedContractData as GenericContract)?.inheritedFunctions as InheritedFunctions
+        )?.[fn.name],
       };
     })
     .sort((a, b) => (b.inheritedFrom ? b.inheritedFrom.localeCompare(a.inheritedFrom) : 1));

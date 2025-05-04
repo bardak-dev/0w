@@ -1,18 +1,18 @@
 "use client";
 
-import { Dispatch, SetStateAction } from "react";
-import { Tuple } from "./Tuple";
-import { TupleArray } from "./TupleArray";
-import { AbiParameter } from "abitype";
 import {
   AddressInput,
   Bytes32Input,
   BytesInput,
   InputBase,
   IntegerInput,
-  IntegerVariant,
-} from "~~/components/scaffold-eth";
-import { AbiParameterTuple } from "~~/utils/scaffold-eth/contract";
+  type IntegerVariant,
+} from "@/libs/scaffold-eth/components";
+import type { AbiParameterTuple } from "@/libs/scaffold-eth/utils/contract";
+import type { AbiParameter } from "abitype";
+import type { Dispatch, SetStateAction } from "react";
+import { Tuple } from "./Tuple";
+import { TupleArray } from "./TupleArray";
 
 type ContractInputProps = {
   setForm: Dispatch<SetStateAction<Record<string, any>>>;
@@ -30,7 +30,7 @@ export const ContractInput = ({ setForm, form, stateObjectKey, paramType }: Cont
     value: form?.[stateObjectKey],
     placeholder: paramType.name ? `${paramType.type} ${paramType.name}` : paramType.type,
     onChange: (value: any) => {
-      setForm(form => ({ ...form, [stateObjectKey]: value }));
+      setForm((form) => ({ ...form, [stateObjectKey]: value }));
     },
   };
 
@@ -75,7 +75,9 @@ export const ContractInput = ({ setForm, form, stateObjectKey, paramType }: Cont
   return (
     <div className="flex flex-col gap-1.5 w-full">
       <div className="flex items-center ml-2">
-        {paramType.name && <span className="text-xs font-medium mr-2 leading-none">{paramType.name}</span>}
+        {paramType.name && (
+          <span className="text-xs font-medium mr-2 leading-none">{paramType.name}</span>
+        )}
         <span className="block text-xs font-extralight leading-none">{paramType.type}</span>
       </div>
       {renderInput()}

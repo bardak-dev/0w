@@ -1,8 +1,8 @@
-import { ReactElement, useState } from "react";
-import { TransactionBase, TransactionReceipt, formatEther, isAddress, isHex } from "viem";
+import { Address } from "@/libs/scaffold-eth/components";
+import { replacer } from "@/libs/scaffold-eth/utils/common";
 import { ArrowsRightLeftIcon } from "@heroicons/react/24/solid";
-import { Address } from "~~/components/scaffold-eth";
-import { replacer } from "~~/utils/scaffold-eth/common";
+import { type ReactElement, useState } from "react";
+import { type TransactionBase, type TransactionReceipt, formatEther, isAddress, isHex } from "viem";
 
 type DisplayContent =
   | string
