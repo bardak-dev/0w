@@ -10,7 +10,13 @@ const _useDebugContract = () => {
 
   const deployedContractData = useMemo(() => ({
     address: contract?.addressChain,
-    abi: JSON.parse(data?.result ?? '[]'),
+    abi: (() => {
+      try {
+        return JSON.parse(data?.result ?? '[]');
+      } catch(e) {
+        return [];
+      }
+    })(),
     external: true
   } as any), [data, contract]);
 
