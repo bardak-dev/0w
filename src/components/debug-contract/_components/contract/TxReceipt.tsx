@@ -1,4 +1,4 @@
-import { ObjectFieldDisplay } from "@/components/debug-contracts/_components/contract";
+import { ObjectFieldDisplay } from "@/components/debug-contract/_components/contract";
 import { replacer } from "@/libs/scaffold-eth/utils/common";
 import { CheckCircleIcon, DocumentDuplicateIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";

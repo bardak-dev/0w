@@ -7,7 +7,7 @@ import {
   getInitialFormState,
   getParsedContractFunctionArgs,
   transformAbiFunction,
-} from "@/components/debug-contracts/_components/contract";
+} from "@/components/debug-contract/_components/contract";
 import { IntegerInput } from "@/libs/scaffold-eth/components";
 import { useTransactor } from "@/libs/scaffold-eth/hooks";
 import { useTargetNetwork } from "@/libs/scaffold-eth/hooks/useTargetNetwork";

@@ -7,7 +7,7 @@ import {
   getInitialFormState,
   getParsedContractFunctionArgs,
   transformAbiFunction,
-} from "@/components/debug-contracts/_components/contract";
+} from "@/components/debug-contract/_components/contract";
 import { useTargetNetwork } from "@/libs/scaffold-eth/hooks/useTargetNetwork";
 import { getParsedError, notification } from "@/libs/scaffold-eth/utils";
 import type { Abi, AbiFunction } from "abitype";

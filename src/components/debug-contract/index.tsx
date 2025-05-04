@@ -1,7 +1,7 @@
 "use client";
 
 import { IconSearch } from "@/assets/icons/Search";
-import { ButtonToken } from "@/components/debug-contracts/_components/ButtonToken";
+import { ButtonToken } from "@/components/debug-contract/_components/ButtonToken";
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle } from "@/components/ui/drawer";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useDebugContract } from "@/hooks/useDebugContract";

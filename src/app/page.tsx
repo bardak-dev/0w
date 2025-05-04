@@ -1,6 +1,6 @@
 import { ThemeToggle } from "@/app/theme-toogle";
 import { ConnectWallet } from "@/components/connect-wallet";
-import { DebugContracts } from "@/components/debug-contracts";
+import { DebugContracts } from "@/components/debug-contract";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
