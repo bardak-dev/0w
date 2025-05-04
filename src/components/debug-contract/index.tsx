@@ -8,7 +8,7 @@ import { useDebugContract } from "@/hooks/useDebugContract";
 import { useTokens } from "@/hooks/useTokens";
 import { useAppKit } from "@/libs/reown/config";
 import { memo, useMemo, useState } from "react";
-import { ContractUI } from "~~/components/debug-contract/_components/contract";
+import { ContractUI } from "@/components/debug-contract/_components/contract";
 
 const ChooseToken = memo(() => {
   const { setContract: setSelectedToken } = useDebugContract();
