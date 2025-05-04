@@ -3,15 +3,13 @@
 import {Button} from '@/components/ui/button';
 import {useAppKitAccount} from '@reown/appkit/react';
 import {useEnsAvatar, useEnsName} from 'wagmi';
-import {reownAppKit} from '@/libs/reown/config';
-import {useMemo} from 'react';
-import {useTheme} from 'next-themes';
+import {useAppKit} from '@/libs/reown/config';
+import {useTokens} from '@/hooks/useTokens';
 
-export const ConnectWalletButton = () => {
-  const {theme} = useTheme();
-  const appKit = useMemo(() => {
-    return reownAppKit(theme, theme === 'dark' ? '#ffffff' : undefined);
-  }, [theme]);
+export const ConnectWallet = () => {
+  const tokens = useTokens();
+  console.log('tokens', tokens);
+  const appKit = useAppKit();
 
   const {address} = useAppKitAccount();
 

@@ -6,6 +6,7 @@ import {ThemeProvider} from 'next-themes';
 import {GeistSans} from 'geist/font/sans';
 import {GeistMono} from 'geist/font/mono';
 import './styles.css';
+import {MonoHooksStoreNextJS} from '@/app/monohook';
 
 export const metadata: Metadata = {
   title: '0w',
@@ -19,9 +20,10 @@ export default async ({children}: PropsWithChildren) => {
     <html lang="en" suppressHydrationWarning>
     <body className={`${GeistSans.variable} ${GeistMono.variable}`}>
     <ReownContextProvider cookies={cookies}>
-      <ThemeProvider attribute="class">
+      <ThemeProvider attribute="data-theme" defaultTheme="system" enableSystem disableTransitionOnChange>
         {children}
       </ThemeProvider>
+      <MonoHooksStoreNextJS/>
     </ReownContextProvider>
     </body>
     </html>

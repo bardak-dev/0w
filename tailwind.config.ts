@@ -8,12 +8,15 @@ const config = {
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}'
   ],
-  prefix: '',
   theme: {
-    container: {
-      center: true,
-      padding: '2rem',
-    },
+    extend: {
+      fontFamily: {
+        sans: ['var(--font-geist-sans)', 'sans-serif'],
+        mono: ['var(--font-geist-mono)', 'monospace']
+      },
+      boxShadow: { center: "0 0 12px -2px rgb(0 0 0 / 0.05)" },
+      animation: { "pulse-fast": "pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite" },
+    }
   }
 } satisfies Config;
 

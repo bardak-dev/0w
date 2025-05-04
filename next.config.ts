@@ -1,6 +1,9 @@
 import type {NextConfig} from 'next';
 
-const nextConfig: NextConfig = {
+const nextConfig = {
+  turbopack: {
+    resolveExtensions: ['.mdx', '.tsx', '.ts', '.jsx', '.js', '.json'],
+  },
   eslint: {
     ignoreDuringBuilds: true
   },
@@ -9,6 +12,6 @@ const nextConfig: NextConfig = {
     config.externals.push('pino-pretty', 'encoding');
     return config;
   }
-};
+} satisfies NextConfig;
 
 export default nextConfig;

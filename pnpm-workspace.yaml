@@ -4,5 +4,6 @@ onlyBuiltDependencies:
   - bufferutil
   - keccak
   - sharp
+  - typia
   - unrs-resolver
   - utf-8-validate

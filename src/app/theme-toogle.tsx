@@ -3,9 +3,23 @@ import {Moon, Sun} from 'lucide-react';
 import {useTheme} from 'next-themes';
 import {Button} from '@/components/ui/button';
 import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from '@/components/ui/dropdown-menu';
+import {useEffect} from 'react';
+import {useAppKit} from '@/libs/reown/config';
+import {ThemeMode} from '@reown/appkit';
 
 export function ThemeToggle() {
-  const {setTheme} = useTheme();
+  const {setTheme, theme} = useTheme();
+  const kit = useAppKit();
+
+  useEffect(() => {
+    if(kit.getThemeMode() === theme) {
+      return;
+    }
+    kit.setThemeMode(theme as ThemeMode);
+    kit.setThemeVariables({
+      '--w3m-accent': theme === 'dark' ? '#ffffff' : '#000000'
+    });
+  }, [theme]);
 
   return (
     <DropdownMenu>
@@ -20,16 +34,16 @@ export function ThemeToggle() {
       <DropdownMenuContent align="end" className="rounded-xl">
         <DropdownMenuItem
           onClick={() => setTheme('light')}
-          className="rounded-t-[10px]"
+          className="rounded-t-[10px] cursor-pointer"
         >
           Light
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('dark')}>
+        <DropdownMenuItem className="cursor-pointer" onClick={() => setTheme('dark')}>
           Dark
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => setTheme('system')}
-          className="rounded-b-[10px]"
+          className="cursor-pointer rounded-b-[10px]"
         >
           System
         </DropdownMenuItem>
