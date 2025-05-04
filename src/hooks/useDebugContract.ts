@@ -12,7 +12,7 @@ const _useDebugContract = () => {
     address: contract?.addressChain,
     abi: JSON.parse(data?.result ?? '[]'),
     external: true
-  }), [data, contract]);
+  } as any), [data, contract]);
 
   useEffect(() => {
 

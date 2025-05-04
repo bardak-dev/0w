@@ -8,7 +8,6 @@ import {useTokens} from '@/hooks/useTokens';
 
 export const ConnectWallet = () => {
   const tokens = useTokens();
-  console.log('tokens', tokens);
   const appKit = useAppKit();
 
   const {address} = useAppKitAccount();

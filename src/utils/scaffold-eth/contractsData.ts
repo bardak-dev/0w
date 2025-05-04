@@ -5,7 +5,6 @@ const DEFAULT_ALL_CONTRACTS: GenericContractsDeclaration[number] = {};
 
 export function useAllContracts() {
   const { targetNetwork } = useTargetNetwork();
-  console.log('targetNetwork',targetNetwork)
   const contractsData = contracts?.[targetNetwork.id];
   // using constant to avoid creating a new object on every call
   return contractsData || DEFAULT_ALL_CONTRACTS;

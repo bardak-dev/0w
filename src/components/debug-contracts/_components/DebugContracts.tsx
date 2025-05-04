@@ -19,7 +19,7 @@ const ChooseToken = memo(() => {
   const [search, setSearch] = useState<string>('');
   const topTokens: any[] = [];
 
-  const filteredTokens = useMemo(() => {
+  const filteredTokens: any[] = useMemo(() => {
     const networkPrefix = kit.getCaipNetwork()?.caipNetworkId;
     return tokens.reduce((prev, token) => {
       if(token.name.toLowerCase().includes(search.toLowerCase())
